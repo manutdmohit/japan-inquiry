@@ -9,6 +9,7 @@ import { downloadDocx } from './exportDocx'
 import { downloadImage } from './exportImage'
 import { downloadPdf } from './exportPdf'
 import { renderPreview } from './preview'
+import { SAMPLE_FORM_DATA } from './sampleData'
 import { suppressBenignErrors } from './suppressBenignErrors'
 
 suppressBenignErrors()
@@ -73,7 +74,10 @@ function mountApp(): void {
       <section class="panel form-panel" aria-labelledby="form-heading">
         <div class="panel-head">
           <h2 id="form-heading">विवरण भर्नुहोस्</h2>
-          <button type="button" id="btn-clear" class="btn btn-ghost">Clear form</button>
+          <div class="form-actions">
+            <button type="button" id="btn-sample" class="btn btn-ghost">Load sample</button>
+            <button type="button" id="btn-clear" class="btn btn-ghost">Clear form</button>
+          </div>
         </div>
         <form id="inquiry-form" class="inquiry-form" novalidate>
           ${renderFormFields()}
@@ -129,6 +133,18 @@ function bindEvents(): void {
     previewTimer = setTimeout(() => {
       preview.innerHTML = renderPreview(formData)
     }, 120)
+  })
+
+  document.querySelector('#btn-sample')!.addEventListener('click', () => {
+    if (
+      Object.values(formData).some((value) => value.trim()) &&
+      !confirm('Load sample data? Current entries will be replaced.')
+    ) {
+      return
+    }
+    formData = { ...SAMPLE_FORM_DATA }
+    saveFormData()
+    mountApp()
   })
 
   document.querySelector('#btn-clear')!.addEventListener('click', () => {

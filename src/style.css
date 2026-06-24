@@ -136,6 +136,12 @@ body {
   flex-wrap: wrap;
 }
 
+.form-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
 /* Form */
 .form-panel {
   max-height: calc(100vh - 130px);

@@ -62,7 +62,7 @@ export const INQUIRY_FIELDS: InquiryField[] = [
     id: 'sponsorName',
     sn: 9,
     label: 'स्पोन्सरको नाम',
-    placeholder: 'KHADKE TAMATAA',
+    placeholder: 'BIBEK SHRESTHA',
   },
   {
     id: 'permanentAddress',
